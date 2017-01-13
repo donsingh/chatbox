@@ -10,7 +10,7 @@
 	<link href="css/chat.css" rel="stylesheet">
   </head>
   <body>
-	<div class='box'>
+	<div class='box' style='margin-top:-500px;'>
 		<div class='in left-box'>
 			<div class='block search-box'>
 				
@@ -75,18 +75,21 @@
 			</div>
 			</form>
 		</div>
+		<div style='width:100%; text-align:center;'>
+			<p class='btn btn-xs btn-primary' style='font-family:"Courier New";'>
+				CHATBOX <span class='badge'>0</span>
+			</p>
+		</div>
 	</div>
   </body>
 </html>
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 <script>
 var largest = 0;
 var person = <?php echo $_GET['id'];?>;
 var target = 2;
+var flag = 0;
 $(document).ready(function(){
 	scrollDown();
 	setInterval(function(){ check(); }, 500);
@@ -102,6 +105,16 @@ $(document).ready(function(){
 			largest=0;
 			target=t;
 		}
+	});
+	
+	$(".btn-primary").on("click", function(){
+		margin = (flag==0) ? "50" : "-500";
+		$(".box").animate({
+			marginTop: margin
+		},500, function(){
+			console.log($(".box").css("margin-top"));
+		});
+		flag = (flag==0) ? 1 : 0;
 	});
 });
 
@@ -133,7 +146,8 @@ function check()
 		cache:false,
 		method:"POST",
 		data:{ 
-			fetch:largest
+			fetch:largest,
+			thread:1
 		},
 		success:function(data){
 			block = JSON.parse(data);

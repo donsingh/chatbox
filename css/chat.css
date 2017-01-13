@@ -124,3 +124,10 @@
 .sm{
 	font-size:30px;
 }
+.pull{
+	margin:0 auto;
+	width:100px;
+	cursor:pointer;
+	background-color:blue;
+	
+}
